@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import covid from './covid.png';
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       <header className='App-header'>
         <h1>Official NYT Covid Tracker</h1>
         <h2>Deaths since December 21, 2021: {renderInfo()} </h2>
+        <img src={covid} className='App-logo' />
       </header>
       <p>
         All data sourced from:{' '}
