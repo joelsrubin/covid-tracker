@@ -19,3 +19,7 @@ a {
 a:hover {
   color: cornflowerblue;
 }
+
+html {
+  background-color: #282c34;
+}
