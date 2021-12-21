@@ -9,6 +9,7 @@ export const handler: Handler = async () => {
   const info = await response.data.split('\n');
   const latest = info[info.length - 1].split(',');
 
+  const today = 699;
   return {
     statusCode: 200,
     body: JSON.stringify(latest),

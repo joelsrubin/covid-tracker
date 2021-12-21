@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import covid from './covid.png';
+
+import Graphs from './Graphs';
+import Landing from './Landing';
 import './App.css';
 
 function App() {
   const [latest, setLatest] = useState(0);
+  const [page, setPage] = useState('landing');
   const INITIAL = 804916;
   const total = latest - INITIAL;
+
   const loadData = async () => {
     const res = await fetch('/.netlify/functions/data');
     const info = await res.json();
-    console.log({ info });
+
     setLatest(Number(info[2]));
   };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const renderInfo = () => {
     switch (latest) {
@@ -32,13 +32,45 @@ function App() {
     }
   };
 
+  const renderPage = () => {
+    switch (page) {
+      case 'graphs':
+        return <Graphs INITIAL={INITIAL} />;
+      case 'landing':
+      default:
+        return <Landing renderInfo={renderInfo} />;
+    }
+  };
+
+  const pageHandler = () => {
+    if (page === 'landing') {
+      setPage('graphs');
+    } else {
+      setPage('landing');
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1>Official NYT Covid Tracker</h1>
-        <h2>Deaths since December 21, 2021: {renderInfo()} </h2>
-        <img src={covid} className='App-logo' />
-      </header>
+      <div className='tab-container'>
+        <button
+          className={page === 'landing' ? 'tab-selected' : 'tab'}
+          onClick={pageHandler}
+        >
+          Home
+        </button>
+        <button
+          className={page === 'graphs' ? 'tab-selected' : 'tab'}
+          onClick={pageHandler}
+        >
+          Graphs
+        </button>
+      </div>
+      {renderPage()}
       <p>
         All data sourced from:{' '}
         <a href='https://github.com/nytimes/covid-19-data' target='_blank'>
