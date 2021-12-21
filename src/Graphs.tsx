@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { FC } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
 type Stats = {
@@ -21,7 +22,7 @@ type GraphProps = {
   INITIAL: number;
 };
 
-const Graphs: React.FC<GraphProps> = ({ INITIAL }) => {
+const Graphs: FC<GraphProps> = ({ INITIAL }) => {
   const [graphData, setGraphData] = useState([]);
 
   const fetchGraphData = async () => {
@@ -56,7 +57,6 @@ const Graphs: React.FC<GraphProps> = ({ INITIAL }) => {
 
   return (
     <header className='App-header'>
-      <div>Graphs Page</div>
       <div className='container-chart'>
         <ResponsiveLine
           data={dataHandler() || []}
