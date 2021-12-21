@@ -20,7 +20,7 @@ function App() {
   const renderInfo = () => {
     switch (latest) {
       case 0:
-        return <span>Loading...</span>;
+        return <span>0</span>;
       default:
         return (
           <span
