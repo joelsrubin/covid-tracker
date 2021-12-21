@@ -10,11 +10,12 @@ export const handler: Handler = async () => {
   const info = await response.data.split('\n').slice(dec21);
 
   const data = info.map((day) => {
-    const formatted = day.split(',');
+    const [date, cases, deaths] = day.split(',');
+
     return {
-      date: formatted[0],
-      cases: formatted[1],
-      deaths: formatted[2],
+      date,
+      cases,
+      deaths,
     };
   });
   console.log(data);
