@@ -26,9 +26,7 @@ function App() {
       default:
         return (
           <span
-            style={
-              total >= 50000 ? { color: 'red' } : { color: 'blanchedalmond' }
-            }
+            style={total >= 50000 ? { color: 'red' } : { color: 'oldlace' }}
           >
             {total}
           </span>

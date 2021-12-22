@@ -57,6 +57,7 @@ const Graphs: FC<GraphProps> = ({ INITIAL }) => {
 
   return (
     <header className='App-header'>
+      <h1>Line Chart</h1>
       <div className='container-chart'>
         <ResponsiveLine
           data={dataHandler() || []}
@@ -75,7 +76,7 @@ const Graphs: FC<GraphProps> = ({ INITIAL }) => {
             tickPadding: 5,
             tickRotation: 0,
             legend: 'date',
-            legendOffset: 36,
+            legendOffset: 40,
             legendPosition: 'middle',
           }}
           axisLeft={{
@@ -83,10 +84,10 @@ const Graphs: FC<GraphProps> = ({ INITIAL }) => {
             tickPadding: 5,
             tickRotation: 0,
             legend: 'count',
-            legendOffset: -40,
+            legendOffset: -50,
             legendPosition: 'middle',
           }}
-          theme={{ textColor: 'white' }}
+          theme={{ textColor: 'oldlace' }}
           pointSize={10}
           pointColor={{ theme: 'background' }}
           pointBorderWidth={2}
