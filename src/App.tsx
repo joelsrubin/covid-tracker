@@ -7,11 +7,6 @@ import { getNumberOfDays } from './utils';
 const INITIAL = 806336;
 const DATE = '2021-12-21';
 
-type Latest = {
-  date: string;
-  latest: number;
-};
-
 function App() {
   const [latest, setLatest] = useState<Latest>({ date: '', latest: 0 });
   const [page, setPage] = useState('landing');

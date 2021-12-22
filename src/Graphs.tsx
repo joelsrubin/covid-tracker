@@ -2,26 +2,6 @@ import { useEffect, useState } from 'react';
 import type { FC } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
-type Stats = {
-  x: Date;
-  y: number;
-};
-
-type GraphData = {
-  id: string;
-  data: Stats[];
-};
-
-type ApiData = {
-  date: Date;
-  cases: string;
-  deaths: string;
-};
-
-type GraphProps = {
-  INITIAL: number;
-};
-
 const Graphs: FC<GraphProps> = ({ INITIAL }) => {
   const [graphData, setGraphData] = useState([]);
 
