@@ -4,7 +4,7 @@ import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 
-const INITIAL = 804916;
+const INITIAL = 806336;
 
 function App() {
   const [latest, setLatest] = useState(0);
@@ -14,7 +14,7 @@ function App() {
   // Load latest data to display on the landing page
   const loadData = async () => {
     const res = await fetch('/.netlify/functions/data');
-    const [_date, _cases, deaths] = await res.json();
+    const deaths = await res.json();
     setLatest(Number(deaths));
   };
 
@@ -22,11 +22,13 @@ function App() {
   const renderInfo = () => {
     switch (latest) {
       case 0:
-        return <span>0</span>;
+        return <span>{latest}</span>;
       default:
         return (
           <span
-            style={total >= 50000 ? { color: 'red' } : { color: 'greenyellow' }}
+            style={
+              total >= 50000 ? { color: 'red' } : { color: 'blanchedalmond' }
+            }
           >
             {total}
           </span>

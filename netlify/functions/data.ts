@@ -3,11 +3,11 @@ import axios from 'axios';
 
 export const handler: Handler = async () => {
   const response = await axios.get(
-    'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv'
+    'https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us.csv'
   );
 
-  const info = await response.data.split('\n');
-  const latest = info[info.length - 1].split(',');
+  const [header, info] = await response.data.split('\n');
+  const [_a, _b, latest] = info.split(',');
 
   return {
     statusCode: 200,
