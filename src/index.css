@@ -12,8 +12,11 @@ code {
     monospace;
 }
 
+h1 {
+  color: papayawhip;
+}
 a {
-  color: white;
+  color: oldlace;
 }
 
 a:hover {

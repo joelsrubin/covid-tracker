@@ -2,13 +2,15 @@ import covid from './covid.png';
 
 type LandingProps = {
   renderInfo: () => React.ReactElement;
+  projectedTotal: number;
 };
 
-const Landing: React.FC<LandingProps> = ({ renderInfo }) => {
+const Landing: React.FC<LandingProps> = ({ renderInfo, projectedTotal }) => {
   return (
     <header className='App-header'>
       <h1>Official NYT Covid Tracker</h1>
-      <h2>Deaths since December 21, 2021: {renderInfo()} </h2>
+      <h2>Since December 21, 2021: {renderInfo()} </h2>
+      <h2>Projected Total: {projectedTotal || 0} </h2>
       <img src={covid} className='App-logo' />
     </header>
   );
