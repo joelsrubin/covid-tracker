@@ -4,19 +4,21 @@ import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 
+const INITIAL = 804916;
+
 function App() {
   const [latest, setLatest] = useState(0);
   const [page, setPage] = useState('landing');
-  const INITIAL = 804916;
   const total = latest - INITIAL;
 
+  // Load latest data to display on the landing page
   const loadData = async () => {
     const res = await fetch('/.netlify/functions/data');
-    const info = await res.json();
-
-    setLatest(Number(info[2]));
+    const [_date, _cases, deaths] = await res.json();
+    setLatest(Number(deaths));
   };
 
+  // Render latest data
   const renderInfo = () => {
     switch (latest) {
       case 0:
@@ -32,6 +34,7 @@ function App() {
     }
   };
 
+  // Render Landing or Graphs page depending on page state
   const renderPage = () => {
     switch (page) {
       case 'graphs':
@@ -42,6 +45,7 @@ function App() {
     }
   };
 
+  // Handle page changing via tabs
   const pageHandler = () => {
     if (page === 'landing') {
       setPage('graphs');
