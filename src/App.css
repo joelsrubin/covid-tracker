@@ -14,7 +14,7 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 18vmin;
   pointer-events: none;
   margin-top: 50px;
 }
@@ -31,6 +31,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: oldlace;
+  border-top: 2px solid grey;
+  z-index: 0;
+}
+
+.App-header-login {
+  background-color: #282c34;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   font-size: calc(10px + 2vmin);
   color: oldlace;
   border-top: 2px solid grey;
@@ -72,6 +85,12 @@
   background-color: blanchedalmond;
 }
 
+.tab:disabled:hover {
+  background-color: transparent;
+  color: oldlace;
+  cursor: default;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -105,7 +124,7 @@ button {
   background-color: oldlace;
   color: #282c34;
   margin: auto;
-  margin-top: 10px;
+
   height: 8vmin;
   /* width: 12vmin; */
   border: 2px solid grey;
@@ -128,11 +147,17 @@ button {
     background-color: oldlace;
     color: #282c34;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 80vmin;
     height: 10vh;
     width: 80vw;
     border: 2px solid grey;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+    margin-top: 50px;
   }
 }

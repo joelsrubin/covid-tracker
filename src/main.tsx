@@ -7,13 +7,23 @@ import LoginButton from './Login';
 
 ReactDOM.render(
   <Auth0Provider
-    domain=''
-    clientId=''
-    redirectUri={`${window.location.origin}/loggedIn`}
+    domain={
+      //  @ts-ignore
+      import.meta.env.PROD ? process.env.DOMAIN : import.meta.env.VITE_DOMAIN
+    }
+    clientId={
+      //  @ts-ignore
+      import.meta.env.PROD
+        ? //  @ts-ignore
+          process.env.CLIENT_ID
+        : //  @ts-ignore
+          import.meta.env.VITE_CLIENT_ID
+    }
+    redirectUri={`${window.location.origin}/home`}
   >
     <BrowserRouter>
       <Routes>
-        <Route path='/loggedIn' element={<App />} />
+        <Route path='/home' element={<App />} />
         <Route path='/' element={<LoginButton />} />
       </Routes>
     </BrowserRouter>

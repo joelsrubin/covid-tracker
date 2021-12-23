@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const INITIAL = 806336;
 
@@ -71,7 +72,7 @@ function App() {
       setPage('landing');
     }
   }, [loggedIn]);
-
+  const { logout } = useAuth0();
   return (
     <div className='App'>
       <div className='tab-container'>
@@ -86,6 +87,12 @@ function App() {
           onClick={pageHandler}
         >
           Graphs
+        </button>
+        <button
+          className='tab'
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
+          Log Out
         </button>
       </div>
       {renderPage()}
