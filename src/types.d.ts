@@ -2,10 +2,6 @@
  * PropTypes                       *
  ***********************************/
 
-type GraphProps = {
-  INITIAL: number;
-};
-
 type LandingProps = {
   renderInfo: () => React.ReactElement;
   projectedTotal: number;

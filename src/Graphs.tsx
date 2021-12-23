@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { FC } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
-const Graphs: FC<GraphProps> = ({ INITIAL }) => {
+const Graphs = () => {
   const [graphData, setGraphData] = useState([]);
 
   const fetchGraphData = async () => {

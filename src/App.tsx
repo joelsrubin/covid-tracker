@@ -43,7 +43,7 @@ function App() {
   const renderPage = () => {
     switch (page) {
       case 'graphs':
-        return <Graphs INITIAL={INITIAL} />;
+        return <Graphs />;
       case 'landing':
       default:
         return (
