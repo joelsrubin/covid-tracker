@@ -18,7 +18,7 @@ const Graphs: FC<GraphProps> = ({ INITIAL }) => {
         data: graphData.map((day: ApiData) => {
           return {
             x: day.date,
-            y: Number(day.deaths) - INITIAL,
+            y: Number(day.deaths),
           };
         }),
       },
