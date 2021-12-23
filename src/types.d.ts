@@ -32,6 +32,6 @@ type ApiData = {
 };
 
 type Latest = {
-  date: string;
   count: number;
+  average: number;
 };
