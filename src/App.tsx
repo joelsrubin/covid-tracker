@@ -14,7 +14,7 @@ function App() {
   const [year, month, day] = date.split('-');
   const total = Number(count) - INITIAL;
   const numberOfDays = getNumberOfDays(START_DATE, `${month}-${day}-${year}`);
-
+  console.log(numberOfDays);
   const projectedTotal = (total / numberOfDays) * 90;
 
   // Load latest data to display on the landing page

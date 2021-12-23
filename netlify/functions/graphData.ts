@@ -5,7 +5,7 @@ export const handler: Handler = async () => {
   const response = await axios.get(
     'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv'
   );
-  const dec21 = 700;
+  const dec21 = 701;
 
   const info = await response.data.split('\n').slice(dec21);
 
