@@ -1,7 +1,6 @@
 export function getNumberOfDays(start: string, end: string) {
   const date1 = new Date(start);
   const date2 = new Date(end);
-  console.log({ date1, date2 });
   // One day in milliseconds
   const oneDay = 1000 * 60 * 60 * 24;
   // Calculating the time difference between two dates

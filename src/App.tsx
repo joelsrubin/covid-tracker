@@ -8,7 +8,7 @@ const INITIAL = 808420;
 const START_DATE = '12-21-2021';
 
 function App() {
-  const [latest, setLatest] = useState<Latest>({ date: '', count: 0 });
+  const [latest, setLatest] = useState<Latest>({ date: START_DATE, count: 0 });
   const [page, setPage] = useState('landing');
   const { date, count } = latest;
   const [year, month, day] = date.split('-');
