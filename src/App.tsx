@@ -4,28 +4,31 @@ import Landing from './Landing';
 import './App.css';
 import { getNumberOfDays } from './utils';
 
-const INITIAL = 806336;
-const DATE = '2021-12-21';
+const INITIAL = 808420;
+const START_DATE = '12-21-2021';
 
 function App() {
-  const [latest, setLatest] = useState<Latest>({ date: '', latest: 0 });
+  const [latest, setLatest] = useState<Latest>({ date: '', count: 0 });
   const [page, setPage] = useState('landing');
-  const total = Number(latest.latest) - INITIAL;
-  const numberOfDays = getNumberOfDays(DATE, latest.date);
+  const { date, count } = latest;
+  const [year, month, day] = date.split('-');
+  const total = Number(count) - INITIAL;
+  const numberOfDays = getNumberOfDays(START_DATE, `${month}-${day}-${year}`);
+
   const projectedTotal = (total / numberOfDays) * 90;
 
   // Load latest data to display on the landing page
   const loadData = async () => {
     const res = await fetch('/.netlify/functions/data');
-    const { date, latest } = await res.json();
-    setLatest({ date, latest });
+    const { date, count } = await res.json();
+    setLatest({ date, count });
   };
 
   // Render latest data
   const renderInfo = () => {
-    switch (latest.latest) {
+    switch (count) {
       case 0:
-        return <span>{latest.latest}</span>;
+        return <span>{count}</span>;
       default:
         return (
           <span

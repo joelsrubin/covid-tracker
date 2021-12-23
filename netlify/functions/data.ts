@@ -7,10 +7,10 @@ export const handler: Handler = async () => {
   );
 
   const [header, info] = await response.data.split('\n');
-  const [date, _b, latest] = info.split(',');
+  const [date, _b, count] = info.split(',');
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ date, latest }),
+    body: JSON.stringify({ date, count }),
   };
 };
