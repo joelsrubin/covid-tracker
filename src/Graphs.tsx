@@ -40,7 +40,7 @@ const Graphs = () => {
       <div className='container-chart'>
         <ResponsiveLine
           data={dataHandler() || []}
-          margin={{ top: 50, right: 40, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
           xScale={{ type: 'point' }}
           yScale={{
             type: 'linear',
@@ -53,7 +53,7 @@ const Graphs = () => {
           axisBottom={{
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
+            tickRotation: 45,
             legend: 'date',
             legendOffset: 40,
             legendPosition: 'middle',
@@ -66,7 +66,7 @@ const Graphs = () => {
             legendOffset: -50,
             legendPosition: 'middle',
           }}
-          theme={{ textColor: 'oldlace' }}
+          theme={{ textColor: 'oldlace', fontSize: 10 }}
           pointSize={10}
           pointColor={{ theme: 'background' }}
           pointBorderWidth={2}

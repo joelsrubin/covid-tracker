@@ -91,6 +91,7 @@ button {
 .container-chart {
   height: 50vh;
   width: 70vw;
+  margin-bottom: 10vmin;
 }
 
 @media only screen and (max-width: 600px) {
