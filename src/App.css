@@ -5,6 +5,14 @@
   color: oldlace;
 }
 
+.container-login {
+  height: 80vh;
+  border-top: 2px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .App-logo {
   height: 20vmin;
   pointer-events: none;
@@ -85,7 +93,7 @@
 
 button {
   font-size: calc(10px + 2vmin);
-  color: papayawhip;
+  /* color: papayawhip; */
 }
 
 .container-chart {
@@ -93,9 +101,38 @@ button {
   width: 70vw;
 }
 
+.login {
+  background-color: oldlace;
+  color: #282c34;
+  margin: auto;
+  margin-top: 10px;
+  height: 8vmin;
+  /* width: 12vmin; */
+  border: 2px solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login:hover {
+  color: oldlace;
+  background-color: #646e82;
+}
+
 @media only screen and (max-width: 600px) {
   .container-chart {
     height: 50vh;
     width: 100vw;
+  }
+
+  .login {
+    background-color: oldlace;
+    color: #282c34;
+    margin: auto;
+    margin-top: 10px;
+    height: 10vh;
+    width: 80vw;
+    border: 2px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }

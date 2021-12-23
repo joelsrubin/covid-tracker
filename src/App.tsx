@@ -11,6 +11,7 @@ function App() {
     average: 0,
   });
   const [page, setPage] = useState('landing');
+  const [loggedIn, setLoggedIn] = useState(false);
   const { count, average } = latest;
   const total = Number(count) - INITIAL;
   const projectedTotal = Number(average) * 90;
@@ -64,6 +65,12 @@ function App() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      setPage('landing');
+    }
+  }, [loggedIn]);
 
   return (
     <div className='App'>
