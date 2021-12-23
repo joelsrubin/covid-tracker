@@ -3,7 +3,7 @@ import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 
-const INITIAL = 808420;
+const INITIAL = 806336;
 
 function App() {
   const [latest, setLatest] = useState<Latest>({
