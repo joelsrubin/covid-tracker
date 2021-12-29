@@ -15,8 +15,10 @@ const Graphs = () => {
       {
         id: 'deaths',
         data: graphData.map((day: ApiData) => {
+          const [_year, month, num] = String(day.date).split('-');
+          const formatDate = `${month}-${num}`;
           return {
-            x: day.date,
+            x: formatDate,
             y: Number(day.deaths),
           };
         }),

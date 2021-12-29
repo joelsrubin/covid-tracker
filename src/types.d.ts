@@ -12,7 +12,7 @@ type LandingProps = {
  ***********************************/
 
 type Stats = {
-  x: Date;
+  x: string;
   y: number;
 };
 
