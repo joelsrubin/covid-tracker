@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
+import Message from './Message';
 
 const INITIAL = 806336;
 
@@ -11,6 +12,7 @@ function App() {
     average: 0,
   });
   const [page, setPage] = useState('landing');
+  const [sent, setSent] = useState(false);
   const { count, average } = latest;
   const total = Number(count) - INITIAL;
   const projectedTotal = Number(average) * 90;
@@ -21,6 +23,11 @@ function App() {
     const { count, average } = await res.json();
 
     setLatest({ count, average });
+  };
+
+  // handle state change for submission
+  const sentHandler = () => {
+    setSent(!sent);
   };
 
   // Render latest data
@@ -42,9 +49,11 @@ function App() {
   // Render Landing or Graphs page depending on page state
   const renderPage = () => {
     switch (page) {
-      case 'graphs':
+      case 'Graphs':
         return <Graphs />;
-      case 'landing':
+      case 'Cash Out':
+        return <Message sentHandler={sentHandler} sent={sent} />;
+      case 'Home':
       default:
         return (
           <Landing renderInfo={renderInfo} projectedTotal={projectedTotal} />
@@ -53,12 +62,9 @@ function App() {
   };
 
   // Handle page changing via tabs
-  const pageHandler = () => {
-    if (page === 'landing') {
-      setPage('graphs');
-    } else {
-      setPage('landing');
-    }
+  const pageHandler = ({ target }: any) => {
+    let selection: Page = target.innerText;
+    setPage(selection);
   };
 
   useEffect(() => {
@@ -69,16 +75,22 @@ function App() {
     <div className='App'>
       <div className='tab-container'>
         <button
-          className={page === 'landing' ? 'tab-selected' : 'tab'}
+          className={page === 'Home' ? 'tab-selected' : 'tab'}
           onClick={pageHandler}
         >
           Home
         </button>
         <button
-          className={page === 'graphs' ? 'tab-selected' : 'tab'}
+          className={page === 'Graphs' ? 'tab-selected' : 'tab'}
           onClick={pageHandler}
         >
           Graphs
+        </button>
+        <button
+          className={page === 'Cash Out' ? 'tab-selected' : 'tab'}
+          onClick={pageHandler}
+        >
+          Cash Out
         </button>
       </div>
       {renderPage()}

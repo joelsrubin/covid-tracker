@@ -7,6 +7,11 @@ type LandingProps = {
   projectedTotal: number;
 };
 
+type MessageProps = {
+  sentHandler: () => void;
+  sent: boolean;
+};
+
 /***********************************
  * DataTypes                       *
  ***********************************/
@@ -31,3 +36,5 @@ type Latest = {
   count: number;
   average: number;
 };
+
+type Page = 'Graphs' | 'Cash Out' | 'Home';

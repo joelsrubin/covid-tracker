@@ -88,6 +88,20 @@ button {
   color: papayawhip;
 }
 
+.cashout {
+  height: 20vh;
+  width: 40%;
+  border-radius: 20px;
+  background-color: red;
+  color: black;
+  cursor: pointer;
+}
+
+.cashout:disabled {
+  background-color: lightgoldenrodyellow;
+  color: grey;
+}
+
 .container-chart {
   height: 50vh;
   width: 70vw;
