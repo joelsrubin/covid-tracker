@@ -33,7 +33,7 @@ function App() {
           <span
             style={total >= 50000 ? { color: 'red' } : { color: 'oldlace' }}
           >
-            {total}
+            {total.toLocaleString('en-US')}
           </span>
         );
     }
