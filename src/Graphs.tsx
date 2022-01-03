@@ -1,80 +1,56 @@
-import { useEffect, useState } from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import { useQuery } from 'react-query';
+import Loading from './Loading';
 
 const Graphs = () => {
-  const [graphData, setGraphData] = useState([]);
-
-  const fetchGraphData = async () => {
-    const res = await fetch('/.netlify/functions/graphData');
-    const info = await res.json();
-    setGraphData(info);
-  };
-
-  const dataHandler = () => {
-    const data: GraphData[] = [
-      {
-        id: 'deaths',
-        data: graphData.map((day: ApiData) => {
-          const [_year, month, num] = String(day.date).split('-');
-          const formatDate = `${month}-${num}`;
-          return {
-            x: formatDate,
-            y: Number(day.deaths),
-          };
-        }),
-      },
-    ];
-
-    return data;
-  };
-
-  useEffect(() => {
-    dataHandler();
-  }, [graphData]);
-
-  useEffect(() => {
-    fetchGraphData();
-  }, []);
+  const { isLoading, data } = useQuery('graph', () =>
+    fetch('/.netlify/functions/graphData').then((res) => res.json())
+  );
 
   return (
     <header className='App-header'>
       <h1>Line Chart</h1>
       <div className='container-chart'>
-        <ResponsiveLine
-          data={dataHandler() || []}
-          margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
-          xScale={{ type: 'point' }}
-          yScale={{
-            type: 'linear',
-            min: 'auto',
-            max: 'auto',
-            stacked: true,
-            reverse: false,
-          }}
-          yFormat=' >-.2f'
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 45,
-            legend: 'date',
-            legendOffset: 40,
-            legendPosition: 'middle',
-          }}
-          axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'count',
-            legendOffset: -50,
-            legendPosition: 'middle',
-          }}
-          theme={{ textColor: 'oldlace', fontSize: 10 }}
-          pointSize={10}
-          pointColor={{ theme: 'background' }}
-          pointBorderWidth={2}
-          pointBorderColor={{ from: 'serieColor' }}
-          pointLabelYOffset={-12}
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ResponsiveLine
+            data={data}
+            margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
+            xScale={{ type: 'point' }}
+            yScale={{
+              type: 'linear',
+              min: 'auto',
+              max: 'auto',
+              stacked: true,
+              reverse: false,
+            }}
+            yFormat=' >-.2f'
+            axisBottom={{
+              tickSize: 5,
+
+              tickPadding: 5,
+              tickRotation: 45,
+              legend: 'date',
+              legendOffset: 40,
+              legendPosition: 'middle',
+            }}
+            axisLeft={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: 'count',
+              legendOffset: -50,
+              legendPosition: 'middle',
+            }}
+            theme={{ textColor: 'oldlace', fontSize: 10 }}
+            pointSize={10}
+            pointColor={{ theme: 'background' }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: 'serieColor' }}
+            pointLabelYOffset={-12}
+          />
+        )}
       </div>
     </header>
   );

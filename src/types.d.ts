@@ -13,7 +13,7 @@ type LandingProps = {
 
 type Stats = {
   x: string;
-  y: number;
+  y: number | null;
 };
 
 type GraphData = {

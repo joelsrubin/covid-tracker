@@ -1,30 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
-
-const INITIAL = 806336;
+import Loading from './Loading';
 
 function App() {
-  const [latest, setLatest] = useState<Latest>({
-    count: 0,
-    average: 0,
-  });
   const [page, setPage] = useState('landing');
-  const { count, average } = latest;
-  const total = Number(count) - INITIAL;
-  const projectedTotal = Number(average) * 90;
-
-  // Load latest data to display on the landing page
-  const loadData = async () => {
-    const res = await fetch('/.netlify/functions/data');
-    const { count, average } = await res.json();
-
-    setLatest({ count, average });
-  };
+  const { isLoading, data } = useQuery('repoData', () =>
+    fetch('/.netlify/functions/data').then((res) => res.json())
+  );
 
   // Render latest data
   const renderInfo = () => {
+    const { count, total } = data;
     switch (count) {
       case 0:
         return <span>{count}</span>;
@@ -41,6 +30,7 @@ function App() {
 
   // Render Landing or Graphs page depending on page state
   const renderPage = () => {
+    const { projectedTotal } = data;
     switch (page) {
       case 'graphs':
         return <Graphs />;
@@ -61,10 +51,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
   return (
     <div className='App'>
       <div className='tab-container'>
@@ -81,7 +67,7 @@ function App() {
           Graphs
         </button>
       </div>
-      {renderPage()}
+      {isLoading ? <Loading /> : renderPage()}
       <p>
         All data sourced from:{' '}
         <a href='https://github.com/nytimes/covid-19-data' target='_blank'>

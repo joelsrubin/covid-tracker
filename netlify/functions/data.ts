@@ -10,13 +10,17 @@ export const handler: Handler = async () => {
     'https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us.csv'
   );
 
-  const [__, info] = await response.data.split('\n');
+  const INITIAL = 806336;
+  const [, info] = await response.data.split('\n');
   const averages = await responseTwo.data.split('\n');
   const average = averages[averages.length - 1].split(',')[6];
-  const [date, _, count] = info.split(',');
+  const [, , count] = info.split(',');
+
+  const total = Number(count) - INITIAL;
+  const projectedTotal = Number(average) * 90;
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ date, count, average }),
+    body: JSON.stringify({ total, projectedTotal, count, average }),
   };
 };
