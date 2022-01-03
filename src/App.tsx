@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 import Loading from './Loading';
 
 function App() {
+  const queryClient = useQueryClient();
   const [page, setPage] = useState('landing');
   const { isLoading, data } = useQuery('repoData', () =>
     fetch('/.netlify/functions/data').then((res) => res.json())
   );
-
   // Render latest data
   const renderInfo = () => {
     const { count, total } = data;
@@ -51,6 +51,16 @@ function App() {
     }
   };
 
+  const handleGraphsPrefetch = async () => {
+    await queryClient.prefetchQuery(
+      'graph',
+      () => fetch('/.netlify/functions/graphData').then((res) => res.json()),
+      {
+        staleTime: 10 * 1000, // only prefetch if older than 10 seconds
+      }
+    );
+  };
+
   return (
     <div className='App'>
       <div className='tab-container'>
@@ -63,6 +73,8 @@ function App() {
         <button
           className={page === 'graphs' ? 'tab-selected' : 'tab'}
           onClick={pageHandler}
+          onMouseEnter={handleGraphsPrefetch}
+          onTouchStart={handleGraphsPrefetch}
         >
           Graphs
         </button>
