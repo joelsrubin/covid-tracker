@@ -8,18 +8,18 @@ const Graphs = () => {
   );
 
   return (
-    <header className='App-header'>
+    <>
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <header className='App-header'>
           <h1>Line Chart</h1>
           <div className='container-chart'>
             <LineGraph data={data} />
           </div>
-        </>
+        </header>
       )}
-    </header>
+    </>
   );
 };
 
