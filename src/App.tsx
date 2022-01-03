@@ -5,8 +5,6 @@ import Landing from './Landing';
 import './App.css';
 import Loading from './Loading';
 
-type PrefetchFunc = (query: string, endpoint: string) => Promise<void>;
-
 function App() {
   const queryClient = useQueryClient();
   const [page, setPage] = useState('landing');
@@ -15,7 +13,7 @@ function App() {
   );
 
   // Render Landing or Graphs page depending on page state
-  const renderPage = () => {
+  const renderPage: PageRender = () => {
     switch (page) {
       case 'graphs':
         return <Graphs />;
@@ -26,7 +24,7 @@ function App() {
   };
 
   // Handle page changing via tabs
-  const pageHandler = () => {
+  const pageHandler: SetPageState = () => {
     if (page === 'landing') {
       setPage('graphs');
     } else {
@@ -34,6 +32,7 @@ function App() {
     }
   };
 
+  // Function to handle prefetching data -> only for Graphs currently
   const handlePrefetch: PrefetchFunc = async (query, endpoint) => {
     await queryClient.prefetchQuery(
       query,

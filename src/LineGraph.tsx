@@ -1,20 +1,14 @@
 import { ResponsiveLine } from '@nivo/line';
 
-type Stats = {
-  x: string;
-  y: number | null;
-};
-
-type GraphData = {
-  id: string;
-  data: Stats[];
-};
-
-type LineGraphProps = {
-  data: GraphData[];
-};
-
 const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
+  // TODO: create dynamic dates array depending on size to display fewer dates
+  // const dates = data[0].data.map((x, i) => {
+  //   if (i % 2 === 0) {
+  //     return '';
+  //   }
+  //   return x.x;
+  // });
+
   return (
     <ResponsiveLine
       data={data}

@@ -1,8 +1,7 @@
 import covid from './covid.png';
-import type { FC } from 'react';
 import { useQuery } from 'react-query';
 
-const Landing = () => {
+const Landing: React.FC = () => {
   const { data } = useQuery('repoData', () =>
     fetch('/.netlify/functions/data').then((res) => res.json())
   );

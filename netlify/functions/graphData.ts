@@ -13,7 +13,6 @@ type GraphData = {
 
 type ApiData = {
   date: Date;
-  cases: string;
   deaths: string;
 };
 
@@ -36,7 +35,7 @@ export const handler: Handler = async () => {
   const graph: GraphData[] = [
     {
       id: 'deaths',
-      data: data.map((day: ApiData, i: number) => {
+      data: data.map((day: ApiData) => {
         const [, month, num] = String(day.date).split('-');
         const formatDate = `${month}-${num}`;
 
