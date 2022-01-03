@@ -1,6 +1,11 @@
 import covid from './covid.png';
 import type { FC } from 'react';
 
+type LandingProps = {
+  renderInfo: () => React.ReactElement;
+  projectedTotal: number;
+};
+
 const Landing: FC<LandingProps> = ({ renderInfo, projectedTotal }) => {
   return (
     <header className='App-header'>
