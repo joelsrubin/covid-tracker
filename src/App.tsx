@@ -5,40 +5,23 @@ import Landing from './Landing';
 import './App.css';
 import Loading from './Loading';
 
+type PrefetchFunc = (query: string, endpoint: string) => Promise<void>;
+
 function App() {
   const queryClient = useQueryClient();
   const [page, setPage] = useState('landing');
-  const { isLoading, data } = useQuery('repoData', () =>
+  const { isLoading } = useQuery('repoData', () =>
     fetch('/.netlify/functions/data').then((res) => res.json())
   );
-  // Render latest data
-  const renderInfo = () => {
-    const { count, total } = data;
-    switch (count) {
-      case 0:
-        return <span>{count}</span>;
-      default:
-        return (
-          <span
-            style={total >= 50000 ? { color: 'red' } : { color: 'oldlace' }}
-          >
-            {total.toLocaleString('en-US')}
-          </span>
-        );
-    }
-  };
 
   // Render Landing or Graphs page depending on page state
   const renderPage = () => {
-    const { projectedTotal } = data;
     switch (page) {
       case 'graphs':
         return <Graphs />;
       case 'landing':
       default:
-        return (
-          <Landing renderInfo={renderInfo} projectedTotal={projectedTotal} />
-        );
+        return <Landing />;
     }
   };
 
@@ -51,10 +34,10 @@ function App() {
     }
   };
 
-  const handleGraphsPrefetch = async () => {
+  const handlePrefetch: PrefetchFunc = async (query, endpoint) => {
     await queryClient.prefetchQuery(
-      'graph',
-      () => fetch('/.netlify/functions/graphData').then((res) => res.json()),
+      query,
+      () => fetch(`/.netlify/functions/${endpoint}`).then((res) => res.json()),
       {
         staleTime: 10 * 1000, // only prefetch if older than 10 seconds
       }
@@ -73,8 +56,8 @@ function App() {
         <button
           className={page === 'graphs' ? 'tab-selected' : 'tab'}
           onClick={pageHandler}
-          onMouseEnter={handleGraphsPrefetch}
-          onTouchStart={handleGraphsPrefetch}
+          onMouseEnter={() => handlePrefetch('graphs', 'graphData')}
+          onTouchStart={() => handlePrefetch('graphs', 'graphData')}
         >
           Graphs
         </button>

@@ -3,7 +3,7 @@ import LineGraph from './LineGraph';
 import Loading from './Loading';
 
 const Graphs = () => {
-  const { isLoading, data } = useQuery('graph', () =>
+  const { isLoading, data } = useQuery('graphs', () =>
     fetch('/.netlify/functions/graphData').then((res) => res.json())
   );
 

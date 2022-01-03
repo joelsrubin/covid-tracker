@@ -1,21 +1,24 @@
 import covid from './covid.png';
 import type { FC } from 'react';
+import { useQuery } from 'react-query';
 
-type LandingProps = {
-  renderInfo: () => React.ReactElement;
-  projectedTotal: number;
-};
-
-const Landing: FC<LandingProps> = ({ renderInfo, projectedTotal }) => {
+const Landing = () => {
+  const { data } = useQuery('repoData', () =>
+    fetch('/.netlify/functions/data').then((res) => res.json())
+  );
+  const { total, projectedTotal } = data;
   return (
     <header className='App-header'>
       <h1>Official NYT Covid Tracker</h1>
-      <h2>Since December 21, 2021: {renderInfo()} </h2>
+      <h2>
+        Since December 21, 2021:{' '}
+        <span style={total >= 50000 ? { color: 'red' } : { color: 'oldlace' }}>
+          {total.toLocaleString('en-US')}
+        </span>
+      </h2>
       <h2>
         Projected Total:{' '}
-        {isNaN(projectedTotal)
-          ? 0
-          : Math.floor(projectedTotal).toLocaleString('en-US')}{' '}
+        {Math.floor(projectedTotal).toLocaleString('en-US') || 0}{' '}
       </h2>
       <img src={covid} className='App-logo' />
     </header>
