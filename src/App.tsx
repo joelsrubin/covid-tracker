@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient, useIsFetching } from 'react-query';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 import Loading from './Loading';
+import { Loader } from './GlobalLoader';
 
 function App() {
   const queryClient = useQueryClient();
+  const isFetching = useIsFetching();
   const [page, setPage] = useState('landing');
   const { isLoading } = useQuery('repoData', () =>
     fetch('/.netlify/functions/data').then((res) => res.json())
@@ -45,6 +47,7 @@ function App() {
 
   return (
     <div className='App'>
+      <Loader style={isFetching ? { opacity: 1 } : { opacity: 0 }} />
       <div className='tab-container'>
         <button
           className={page === 'landing' ? 'tab-selected' : 'tab'}

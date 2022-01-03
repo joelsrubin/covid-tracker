@@ -94,9 +94,37 @@ button {
   margin-bottom: 10vmin;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  vertical-align: middle;
+  animation: rotate 1s linear infinite;
+  /* margin: 20px 20px; */
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 2rem;
+  transition: 0.3s ease;
+  pointer-events: none;
+}
+
 @media only screen and (max-width: 600px) {
   .container-chart {
     height: 50vh;
     width: 100vw;
+  }
+
+  .spinner {
+    top: 0rem;
+    left: 0rem;
+    margin: 0;
+    font-size: 1.5rem;
   }
 }
