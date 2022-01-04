@@ -2,7 +2,7 @@ import covid from './covid.png';
 import { useQuery } from 'react-query';
 
 const Landing: React.FC = () => {
-  const { data } = useQuery('repoData', () =>
+  const { data } = useQuery('landing', () =>
     fetch('/.netlify/functions/data').then((res) => res.json())
   );
   const { total, projectedTotal } = data;

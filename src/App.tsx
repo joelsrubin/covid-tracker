@@ -4,13 +4,12 @@ import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
 import Loading from './Loading';
+import { fetchGraphs, fetchLanding } from './Utils';
 
 function App() {
-  const queryClient = useQueryClient();
   const [page, setPage] = useState('landing');
-  const { isLoading } = useQuery('repoData', () =>
-    fetch('/.netlify/functions/data').then((res) => res.json())
-  );
+  const { isLoading } = useQuery('landing', fetchLanding);
+  useQuery('graphs', fetchGraphs);
 
   // Render Landing or Graphs page depending on page state
   const renderPage: PageRender = () => {
@@ -32,17 +31,6 @@ function App() {
     }
   };
 
-  // Function to handle prefetching data -> only for Graphs currently
-  const handlePrefetch: PrefetchFunc = async (query, endpoint) => {
-    await queryClient.prefetchQuery(
-      query,
-      () => fetch(`/.netlify/functions/${endpoint}`).then((res) => res.json()),
-      {
-        staleTime: 10 * 1000, // only prefetch if older than 10 seconds
-      }
-    );
-  };
-
   return (
     <div className='App'>
       <div className='tab-container'>
@@ -55,8 +43,6 @@ function App() {
         <button
           className={page === 'graphs' ? 'tab-selected' : 'tab'}
           onClick={pageHandler}
-          onMouseEnter={() => handlePrefetch('graphs', 'graphData')}
-          onTouchStart={() => handlePrefetch('graphs', 'graphData')}
         >
           Graphs
         </button>

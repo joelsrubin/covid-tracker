@@ -12,7 +12,9 @@ type LineGraphProps = {
   data: GraphData[];
 };
 
-type PrefetchFunc = (query: string, endpoint: string) => Promise<void>;
+type Query = 'landing' | 'graphs';
+
+type PrefetchFunc = () => Promise<void>;
 
 type PageRender = () => React.ReactElement;
 
