@@ -12,7 +12,7 @@ const Graphs = () => {
         <Loading />
       ) : (
         <header className='App-header'>
-          <h1>Line Chart</h1>
+          <h2>Change Over Time</h2>
           <div className='container-chart'>
             <LineGraph data={data || []} />
           </div>

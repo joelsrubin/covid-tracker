@@ -6,7 +6,7 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
+      margin={{ top: 50, right: 40, bottom: 60, left: 70 }}
       xScale={{
         type: 'time',
         format: '%Y-%m-%d',
@@ -34,7 +34,7 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
         tickPadding: 5,
         tickRotation: 0,
         legend: 'count',
-        legendOffset: -50,
+        legendOffset: -60,
         legendPosition: 'middle',
       }}
       theme={{ textColor: 'oldlace', fontSize: 10 }}
