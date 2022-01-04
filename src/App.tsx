@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import Graphs from './Graphs';
 import Landing from './Landing';
 import './App.css';
@@ -9,7 +9,7 @@ import { fetchGraphs, fetchLanding } from './Utils';
 function App() {
   const [page, setPage] = useState('landing');
   const { isLoading } = useQuery('landing', fetchLanding);
-  useQuery('graphs', fetchGraphs);
+  const graphQuery = useQuery('graphs', fetchGraphs);
 
   // Render Landing or Graphs page depending on page state
   const renderPage: PageRender = () => {
@@ -24,10 +24,13 @@ function App() {
 
   // Handle page changing via tabs
   const pageHandler: SetPageState = () => {
-    if (page === 'landing') {
-      setPage('graphs');
-    } else {
-      setPage('landing');
+    switch (page) {
+      case 'landing':
+        setPage('graphs');
+        break;
+      default:
+        setPage('landing');
+        break;
     }
   };
 

@@ -1,19 +1,19 @@
 import { ResponsiveLine } from '@nivo/line';
 
 const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
-  // TODO: create dynamic dates array depending on size to display fewer dates
-  // const dates = data[0].data.map((x, i) => {
-  //   if (i % 2 === 0) {
-  //     return '';
-  //   }
-  //   return x.x;
-  // });
+  const interval = Math.floor(data[0].data.length / 5);
 
   return (
     <ResponsiveLine
       data={data}
       margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
-      xScale={{ type: 'point' }}
+      xScale={{
+        type: 'time',
+        format: '%Y-%m-%d',
+        useUTC: false,
+        precision: 'day',
+      }}
+      xFormat='time:%Y-%m-%d'
       yScale={{
         type: 'linear',
         min: 'auto',
@@ -23,13 +23,11 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
       }}
       yFormat=' >-.2f'
       axisBottom={{
-        tickSize: 5,
-
-        tickPadding: 5,
-        tickRotation: 45,
-        legend: 'date',
-        legendOffset: 40,
+        format: '%b %d',
+        tickValues: `every ${interval} days`,
+        legend: 'time scale',
         legendPosition: 'middle',
+        legendOffset: 50,
       }}
       axisLeft={{
         tickSize: 5,
