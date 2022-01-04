@@ -25,7 +25,7 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
       axisBottom={{
         format: '%b %d',
         tickValues: `every ${interval} days`,
-        legend: 'time scale',
+        legend: 'date',
         legendPosition: 'middle',
         legendOffset: 50,
       }}
