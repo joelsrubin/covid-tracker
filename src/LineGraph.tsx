@@ -13,6 +13,7 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
         useUTC: false,
         precision: 'day',
       }}
+      enableGridX={false}
       xFormat='time:%Y-%m-%d'
       yScale={{
         type: 'linear',
